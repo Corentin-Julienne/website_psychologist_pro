@@ -7,6 +7,18 @@ const routes: Routes = [
 		() => import('./views/main/main.module').then(m => m.MainModule)
 	},
 	{
+		path: 'about', loadChildren:
+		() => import('./views/prez/prez.module').then(m => m.PrezModule)
+	},
+	{
+		path: 'services', loadChildren:
+		() => import('./views/services/services.module').then(m => m.ServicesModule)
+	},
+	{
+		path: 'infos', loadChildren:
+		() => import('./views/infos/infos.module').then(m => m.InfosModule)
+	},
+	{
 		path: 'admin', loadChildren:
 		() => import('./views/admin/admin.module').then(m => m.AdminModule)
 	}
