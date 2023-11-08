@@ -16,11 +16,11 @@ export class AuthService {
 
 	constructor(private http: HttpClient) {};
 
-	login(credentials: LoginCredentials) : Observable<any> {
+	login(credentials: LoginCredentials) : Observable<any> { // modify this
 		return this.http.post<any>(this.apiUrl, credentials);
 	}
 
 	isLogged() : boolean { // modify this
-		return false; 
+		return false;
 	}
 }
