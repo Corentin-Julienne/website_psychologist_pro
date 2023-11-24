@@ -8,10 +8,24 @@ services:
     ports:
       - "4200:4200"
 
-  # backend:
-  #   build: ./backend
-  #   volumes:
-  #     - ./backend:/usr/src/app
-  #     - /usr/src/app/node_modules
-  #   ports:
-  #     - "3000:3000"
+  backend:
+    build: ./backend
+    volumes:
+      - ./backend:/usr/src/app
+      - /usr/src/app/node_modules
+    ports:
+      - "3000:3000"
+    depends_on:
+      - postgres
+  
+  postgres:
+    image: postgres:latest
+    ports:
+      - "5432:5432"
+    # environment:
+    #   - name=value
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+
+volumes:
+  postgres_data:
