@@ -8,6 +8,10 @@ export interface ChangePasswdCredentials {
 	password_new: string;
 }
 
+export interface ChangePasswdResponse {
+	// fulfill that
+}
+
 @Injectable({
 	providedIn: 'root'
 })
@@ -17,11 +21,11 @@ export class RegisterService {
 	
 	constructor(private http: HttpClient) {};
 
-	changePassword(changePasswdCredentials : ChangePasswdCredentials) : Observable<any> { // modify
-		return this.http.patch<any>(this.apiUrl, changePasswdCredentials);
+	changePassword(changePasswdCredentials : ChangePasswdCredentials) : Observable<ChangePasswdResponse> {
+		return this.http.patch<ChangePasswdResponse>(this.apiUrl, changePasswdCredentials);
 	}
 
-	changeUsername(changePasswdCredentials : ChangePasswdCredentials) : Observable<any> { // modify
-		return this.http.patch<any>(this.apiUrl, changePasswdCredentials);
+	changeUsername(changePasswdCredentials : ChangePasswdCredentials) : Observable<ChangePasswdResponse> {
+		return this.http.patch<ChangePasswdResponse>(this.apiUrl, changePasswdCredentials);
 	}
 }

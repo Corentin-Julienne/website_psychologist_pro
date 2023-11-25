@@ -1,10 +1,15 @@
 import { Injectable } from "@angular/core";
 import { HttpClient } from "@angular/common/http";
-import { Observable } from "rxjs";
+import { Observable, tap } from "rxjs";
 
 export interface LoginCredentials {
 	username: string;
   	password: string;
+}
+
+export interface LoginResponse {
+	accessToken: string
+	// complete that
 }
 
 @Injectable({
@@ -16,11 +21,17 @@ export class AuthService {
 
 	constructor(private http: HttpClient) {};
 
-	login(credentials: LoginCredentials) : Observable<any> { // modify this
-		return this.http.post<any>(this.apiUrl, credentials);
+	login(credentials: LoginCredentials) : Observable<LoginResponse> {
+		return this.http.post<LoginResponse>(`${this.apiUrl}/auth/login`, credentials).pipe(
+			tap(tokens => this.storeTokens(tokens))
+		);
 	}
 
-	isLogged() : boolean { // modify this
-		return false;
+	private storeTokens(tokens: LoginResponse) {
+		localStorage.setItem('jwt_token', tokens.accessToken);
+	}
+
+	isLogged() : boolean {
+		return !!localStorage.getItem('jwt_token');
 	}
 }

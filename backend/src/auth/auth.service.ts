@@ -16,9 +16,12 @@ export class AuthService {
 	) {};
 
 	// use to validate that a user have a valid jwt token
-	async validateUserUsingJwt(payloadSub: string) : Promise<User | null> {
-		const user = await this.userRepository.findOne();
+	async validateUserUsingJwt(payloadSub: number) : Promise<User | null> {
+		const user = await this.userRepository.findOne( { where: { id: payloadSub } } ); // test that
 		
+		if (user && user.role === 'admin') {
+			return user;
+		}
 		return null;
 	}
 
@@ -42,13 +45,13 @@ export class AuthService {
 		return { accessToken: this.jwtService.sign(payload) };
 	}
 
-	// check if the hashed password is the same as plain text provided password
-	private async comparePasswords(plainTextPassword: string, hashedPassword: string) : Promise<boolean> {
-		return await bcrypt.compare(plainTextPassword, hashedPassword);
-	}
-
 	// returns a hashed password from a plain text password
 	async createHashedPassword(plainTextPassword: string) : Promise<string> {
 		return await bcrypt.hash(plainTextPassword, 10);
+	}
+
+	// check if the hashed password is the same as plain text provided password
+	private async comparePasswords(plainTextPassword: string, hashedPassword: string) : Promise<boolean> {
+		return await bcrypt.compare(plainTextPassword, hashedPassword);
 	}
 }

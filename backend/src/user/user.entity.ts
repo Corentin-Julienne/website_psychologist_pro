@@ -1,4 +1,5 @@
-import { Entity, PrimaryGeneratedColumn, Column } from "typeorm";
+import { EvalSession } from "src/questionnaires/sessions/eval-sessions.entity";
+import { Entity, PrimaryGeneratedColumn, Column, OneToMany } from "typeorm";
 
 @Entity()
 export class User {
@@ -17,4 +18,7 @@ export class User {
 
 	@Column()
 	role: string;
+
+	@OneToMany(() => EvalSession, evalSession => evalSession.user)
+	evalSessions: EvalSession[];
 }

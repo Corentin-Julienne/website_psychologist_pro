@@ -5,7 +5,7 @@ import { AuthService } from "./auth.service";
 import { User } from "src/user/user.entity";
 
 @Injectable()
-export class JwtStrategy extends PassportStrategy(Strategy) {
+export class JwtStrategy extends PassportStrategy(Strategy, 'jwt') {
 
 	constructor(private authService: AuthService) {
 		super ({
