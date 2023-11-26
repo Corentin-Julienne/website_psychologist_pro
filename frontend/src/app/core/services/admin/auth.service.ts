@@ -27,7 +27,11 @@ export class AuthService {
 		);
 	}
 
-	private storeTokens(tokens: LoginResponse) {
+	logout() : void {
+		localStorage.removeItem('jwt_token');
+	}
+
+	private storeTokens(tokens: LoginResponse) : void {
 		localStorage.setItem('jwt_token', tokens.accessToken);
 	}
 

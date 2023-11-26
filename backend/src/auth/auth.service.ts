@@ -5,7 +5,6 @@ import { InjectRepository } from "@nestjs/typeorm";
 import { Repository } from "typeorm";
 import * as bcrypt from 'bcryptjs';
 
-
 @Injectable()
 export class AuthService {
 
@@ -14,7 +13,7 @@ export class AuthService {
 		private userRepository: Repository<User>,
 		private jwtService: JwtService
 	) {};
-
+	
 	// use to validate that a user have a valid jwt token
 	async validateUserUsingJwt(payloadSub: number) : Promise<User | null> {
 		const user = await this.userRepository.findOne( { where: { id: payloadSub } } ); // test that
@@ -41,7 +40,6 @@ export class AuthService {
 			username: user.username, 
 			userId: user.id
 		}
-
 		return { accessToken: this.jwtService.sign(payload) };
 	}
 

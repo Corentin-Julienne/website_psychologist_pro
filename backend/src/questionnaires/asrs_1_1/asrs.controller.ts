@@ -1,14 +1,17 @@
-import { Controller, Get, Post, Patch, Put } from "@nestjs/common";
+import { Controller, Get, UseGuards, Param } from "@nestjs/common";
 import { ASRSService } from "./asrs.service";
-import { ASRS } from "./asrs.entity";
 
-@Controller('asrs_1_1')
+@Controller('users/:userId/eval-sessions/:sessionId/asrs')
 export class ASRSController {
 
 	constructor(private readonly asrsService: ASRSService) {};
 
+	@UseGuards() // update this
 	@Get()
-	findAll() : Promise<ASRS[]> {
-		return this.asrsService.findAll();
+	findASRSForUserSession(
+		@Param('userId') userId: number,
+		@Param('sessionId') sessionId: number
+	) {
+		return this.asrsService.findASRSForUserSession(userId, sessionId);
 	}
 }

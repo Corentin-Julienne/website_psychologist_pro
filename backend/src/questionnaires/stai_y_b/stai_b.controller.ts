@@ -1,14 +1,18 @@
-import { Controller, Get, Patch, Post, Put } from "@nestjs/common";
+import { Controller, Get, Param, Patch, Post, Put, UseGuards } from "@nestjs/common";
 import { STAIBService } from './stai_b.service';
 import { STAIB } from "./stai_b.entity";
 
-@Controller('stai_b')
+@Controller('users/:userId/eval-sessions/:sessionId/stai_b')
 export class STAIBController {
 
 	constructor(private readonly staibService: STAIBService) {};
 
+	@UseGuards()
 	@Get()
-	findAll() : Promise<STAIB[]> {
-		return this.staibService.findAll();
+	findSTAIBForUserSession(
+		@Param('userId') userId: number,
+		@Param('sessionId') sessionId: number
+	) : Promise<STAIB | undefined> {
+		return this.staibService.findSTAIBForUserSession(userId, sessionId);
 	}
 }

@@ -2,16 +2,21 @@ import { Injectable } from "@nestjs/common";
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from "typeorm";
 import { STAIB } from './stai_b.entity';
+import { EvalSession } from '../sessions/eval-sessions.entity';
 
 @Injectable()
 export class STAIBService {
 
 	constructor(
-		@InjectRepository(STAIB)
-		private staibRepository: Repository<STAIB>
+		@InjectRepository(EvalSession)
+		private evalSessionRepository: Repository<EvalSession>
 	) {};
 
-	findAll() : Promise<STAIB[]> {
-		return this.staibRepository.find();
+	async findSTAIBForUserSession(userId: number, sessionId: number) : Promise<STAIB | undefined> {
+		const evalSession: EvalSession = await this.evalSessionRepository.findOne({
+			where: { id: sessionId, user: { id: userId } },
+			relations: ['stai_b']
+		});
+		return evalSession?.staiB;
 	}
 }

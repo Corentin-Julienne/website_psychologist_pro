@@ -19,7 +19,7 @@ export class AuthGuard implements CanActivate {
 			return true;
 		} else {
 			// redirecting to login admin
-			this.router.navigate(['/login'], { queryParams: { returnUrl: state.url } }); // test this
+			this.router.navigate(['/admin', '/login'], { queryParams: { returnUrl: state.url } }); // test this
 			return false;
 		}
 	}
