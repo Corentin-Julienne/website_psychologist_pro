@@ -1,5 +1,5 @@
-import { EvalSession } from "src/questionnaires/sessions/eval-sessions.entity";
-import { Entity, PrimaryGeneratedColumn, Column, OneToMany } from "typeorm";
+import { EvalSession } from "src/questionnaires/sessions/eval-session.entity";
+import { Entity, PrimaryGeneratedColumn, Column, OneToMany, CreateDateColumn, UpdateDateColumn } from "typeorm";
 
 @Entity()
 export class User {
@@ -19,6 +19,12 @@ export class User {
 	@Column()
 	role: string;
 
-	@OneToMany(() => EvalSession, evalSession => evalSession.user)
+	@CreateDateColumn()
+	createdAt: Date;
+
+	@UpdateDateColumn()
+	updatedAt: Date;
+
+	@OneToMany(() => EvalSession, evalSession => evalSession.user, { cascade: ['remove'] })
 	evalSessions: EvalSession[];
 }

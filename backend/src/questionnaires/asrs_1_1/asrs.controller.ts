@@ -9,9 +9,8 @@ export class ASRSController {
 	@UseGuards() // update this
 	@Get()
 	findASRSForUserSession(
-		@Param('userId') userId: number,
-		@Param('sessionId') sessionId: number
+		@Param('userId') userId: number
 	) {
-		return this.asrsService.findASRSForUserSession(userId, sessionId);
+		return this.asrsService.findASRSForUserSession(userId);
 	}
 }

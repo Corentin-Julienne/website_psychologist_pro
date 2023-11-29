@@ -11,7 +11,7 @@ import { STAIA } from './questionnaires/stai_y_a/stai_a.entity';
 import { STAIB } from './questionnaires/stai_y_b/stai_b.entity';
 import { TAS } from './questionnaires/tas_20/tas.entity';
 import { UPPS } from './questionnaires/upps_p/upps.entity';
-import { EvalSession } from './questionnaires/sessions/eval-sessions.entity';
+import { EvalSession } from './questionnaires/sessions/eval-session.entity';
 
 @Module({
   	imports: [

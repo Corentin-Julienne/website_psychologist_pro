@@ -10,5 +10,5 @@ import { BDI13Service } from './bdi13.service';
 	controllers: [BDI13Controller]
 })
 export class BDI13Module {
-
+	
 }

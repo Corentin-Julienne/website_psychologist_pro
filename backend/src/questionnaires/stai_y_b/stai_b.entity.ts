@@ -1,4 +1,4 @@
-import { EvalSession } from "src/questionnaires/sessions/eval-sessions.entity";
+import { EvalSession } from "src/questionnaires/sessions/eval-session.entity";
 import { Entity, PrimaryGeneratedColumn, Column, OneToOne } from "typeorm";
 
 @Entity()
