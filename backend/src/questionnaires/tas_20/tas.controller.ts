@@ -1,6 +1,7 @@
 import { Controller, Get, Param, UseGuards } from "@nestjs/common";
 import { TASService } from './tas.service';
 import { TAS } from "./tas.entity";
+import { TasResponseDto } from "./tas-reponse.dto";
 
 @Controller('users/:userId/eval-sessions/:sessionId/tas')
 export class TASController {
@@ -9,10 +10,9 @@ export class TASController {
 
 	@UseGuards() // update this
 	@Get()
-	findTASForUserSession(
-		@Param('userId') userId: number,
-		@Param('sessionId') sessionId: number
-	) : Promise<TAS | undefined> {
-		return this.tasService.findTASForUserSession(userId, sessionId);
+	getTASReport(
+		@Param('userId') userId: number
+	) : Promise<TasResponseDto | undefined> {
+		return this.getTASReport(userId);
 	}
 }

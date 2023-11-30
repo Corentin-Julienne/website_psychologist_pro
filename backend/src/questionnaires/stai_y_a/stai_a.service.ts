@@ -7,6 +7,7 @@ import { IQuestionnaire } from "../sessions/questionnaire.interface";
 import { QuestionnaireDto } from '../sessions/questionnaire.dto';
 import { EvalSessionService } from '../sessions/eval-session.service';
 import { STAIAResponseDto } from "./stai_a-reponse.dto";
+import { StatsService } from '../../utils/stats/stats.service';
 
 @Injectable()
 export class STAIAService implements IQuestionnaire {
@@ -16,7 +17,8 @@ export class STAIAService implements IQuestionnaire {
 		private evalSessionRepository: Repository<EvalSession>,
 		@InjectRepository(STAIA)
 		private staiaRepository: Repository<STAIA>,
-		private evalSessionService: EvalSessionService
+		private evalSessionService: EvalSessionService,
+		private statsService: StatsService
 	) {};
 
 	async getSTAIAReport(userId: number) : Promise<STAIAResponseDto | undefined> {
@@ -32,7 +34,24 @@ export class STAIAService implements IQuestionnaire {
 	}
 
 	private computeSTAIAResults(staiaResponseDto: STAIAResponseDto, items: number[]) : void {
-		
+		const reverseItemsIndex: number[] = [0, 1, 4, 7, 9, 10, 14, 15, 18, 19];
+		items = this.statsService.processReverseItems(items, reverseItemsIndex, 4);
+
+		for (const item of items) {
+			staiaResponseDto.totalScore += item;
+		}
+
+		if (staiaResponseDto.totalScore <= 35) {
+			staiaResponseDto.result = 'very low';
+		} else if (staiaResponseDto.totalScore >= 36 && staiaResponseDto.totalScore <= 45) {
+			staiaResponseDto.result = 'low';
+		} else if (staiaResponseDto.totalScore >= 46 && staiaResponseDto.totalScore <= 55) {
+			staiaResponseDto.result = 'medium';
+		} else if (staiaResponseDto.totalScore >= 56 && staiaResponseDto.totalScore <= 65) {
+			staiaResponseDto.result = 'high';
+		} else {
+			staiaResponseDto.result = 'very high';
+		}
 	}
 
 	async create(sessionId: number, questionnaireDto: QuestionnaireDto, queryRunner: QueryRunner): Promise<STAIA> {

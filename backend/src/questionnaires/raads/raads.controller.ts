@@ -1,6 +1,7 @@
-import { Controller, Get, Post, Patch, Put, UseGuards, Param } from "@nestjs/common";
+import { Controller, Get, UseGuards, Param } from "@nestjs/common";
 import { RAADS } from "./raads.entity";
 import { RAADSService } from './raads.service';
+import { RAADSResponseDto } from './raads-response.dto';
 
 @Controller('users/:userId/eval-sessions/:sessionId/raads')
 export class RAADSController {
@@ -9,10 +10,9 @@ export class RAADSController {
 
 	@UseGuards() // update this
 	@Get()
-	findRAADSForUserSession(
-		@Param('userId') userId: number,
-		@Param('sessionId') sessionId: number
-	) : Promise<RAADS | undefined> {
-		return this.findRAADSForUserSession(userId, sessionId);
+	getRAADSReport(
+		@Param('userId') userId: number
+	) : Promise<RAADSResponseDto | undefined> {
+		return this.getRAADSReport(userId);
 	}
 }

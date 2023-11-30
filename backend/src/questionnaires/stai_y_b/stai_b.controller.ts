@@ -1,6 +1,7 @@
-import { Controller, Get, Param, Patch, Post, Put, UseGuards } from "@nestjs/common";
+import { Controller, Get, Param, UseGuards } from "@nestjs/common";
 import { STAIBService } from './stai_b.service';
 import { STAIB } from "./stai_b.entity";
+import { STAIBResponseDto } from "./stai_b-reponse.dto";
 
 @Controller('users/:userId/eval-sessions/:sessionId/stai_b')
 export class STAIBController {
@@ -9,10 +10,9 @@ export class STAIBController {
 
 	@UseGuards()
 	@Get()
-	findSTAIBForUserSession(
-		@Param('userId') userId: number,
-		@Param('sessionId') sessionId: number
-	) : Promise<STAIB | undefined> {
-		return this.staibService.findSTAIBForUserSession(userId, sessionId);
+	getSTAIBReport(
+		@Param('userId') userId: number
+	) : Promise<STAIBResponseDto | undefined> {
+		return this.staibService.getSTAIBReport(userId);
 	}
 }

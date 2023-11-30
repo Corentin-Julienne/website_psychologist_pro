@@ -1,6 +1,7 @@
 import { Controller, Get, UseGuards, Param } from "@nestjs/common";
 import { UPPSService } from "./upps.service";
 import { UPPS } from "./upps.entity";
+import { UPPSResponseDto } from './upps-response.dto';
 
 @Controller('users/:userId/eval-sessions/:sessionId/upps')
 export class UPPSController {
@@ -11,8 +12,7 @@ export class UPPSController {
 	@Get()
 	findUPPSForUserSession(
 		@Param('userId') userId: number,
-		@Param('sessionId') sessionId: number
-	) : Promise<UPPS | undefined> {
-		return this.uppsService.findUPPSForUserSession(userId, sessionId);
+	) : Promise<UPPSResponseDto | undefined> {
+		return this.uppsService.getUPPSReport(userId);
 	}
 }
