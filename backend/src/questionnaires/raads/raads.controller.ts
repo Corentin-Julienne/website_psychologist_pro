@@ -13,6 +13,6 @@ export class RAADSController {
 	getRAADSReport(
 		@Param('userId') userId: number
 	) : Promise<RAADSResponseDto | undefined> {
-		return this.getRAADSReport(userId);
+		return this.raadsService.getRAADSReport(userId);
 	}
 }

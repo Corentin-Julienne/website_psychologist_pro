@@ -1,11 +1,11 @@
-import { ASRS } from "src/questionnaires/asrs_1_1/asrs.entity";
-import { BDI13 } from "src/questionnaires/bdi13/bdi13.entity";
-import { RAADS } from "src/questionnaires/raads/raads.entity";
-import { STAIA } from "src/questionnaires/stai_y_a/stai_a.entity";
-import { STAIB } from "src/questionnaires/stai_y_b/stai_b.entity";
-import { TAS } from "src/questionnaires/tas_20/tas.entity";
-import { UPPS } from "src/questionnaires/upps_p/upps.entity";
-import { User } from "src/user/user.entity";
+import { ASRS } from "../asrs_1_1/asrs.entity";
+import { BDI13 } from "../bdi13/bdi13.entity";
+import { RAADS } from "../raads/raads.entity";
+import { STAIA } from "../stai_y_a/stai_a.entity";
+import { STAIB } from "../stai_y_b/stai_b.entity";
+import { TAS } from "../tas_20/tas.entity";
+import { UPPS } from "../upps_p/upps.entity";
+import { User } from "../../user/user.entity";
 import { CreateDateColumn, Entity, JoinColumn, ManyToOne, OneToOne, PrimaryGeneratedColumn } from "typeorm";
 
 @Entity()

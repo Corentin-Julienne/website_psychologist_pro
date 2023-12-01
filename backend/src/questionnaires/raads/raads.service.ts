@@ -6,7 +6,7 @@ import { EvalSession } from '../sessions/eval-session.entity';
 import { IQuestionnaire } from "../sessions/questionnaire.interface";
 import { QuestionnaireDto } from "../sessions/questionnaire.dto";
 import { EvalSessionService } from '../sessions/eval-session.service';
-import { StatsService } from "src/utils/stats/stats.service";
+import { StatsService } from "../../utils/stats/stats.service";
 import { RAADSResponseDto } from './raads-response.dto';
 
 @Injectable()

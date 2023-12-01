@@ -3,7 +3,7 @@ import { InjectRepository } from "@nestjs/typeorm";
 import { QueryRunner, Repository } from "typeorm";
 import { EvalSessionDto } from "./eval-session.dto";
 import { EvalSession } from './eval-session.entity';
-import { User } from "src/user/user.entity";
+import { User } from "../../user/user.entity";
 import { ASRSService } from "../asrs_1_1/asrs.service";
 import { BDI13Service } from '../bdi13/bdi13.service';
 import { RAADSService } from '../raads/raads.service';

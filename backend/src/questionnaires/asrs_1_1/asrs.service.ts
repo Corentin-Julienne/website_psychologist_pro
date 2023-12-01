@@ -19,12 +19,7 @@ export class ASRSService implements IQuestionnaire {
 		private evalSessionService: EvalSessionService
 	) {};
 
-	async findASRSForUserSession(userId: number) : Promise<ASRS | undefined> {
-		const evalSession: EvalSession = await this.evalSessionService.retrieveEvalSession(userId);
-		return evalSession?.asrs;
-	}
-
-	async returnASRSReport(userId: number) : Promise<ASRSResponseDto> {
+	async getASRSReport(userId: number) : Promise<ASRSResponseDto> {
 		const evalSession: EvalSession = await this.evalSessionService.retrieveEvalSession(userId);
 		const asrs: ASRS = evalSession.asrs;
 
